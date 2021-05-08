@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { Ctx, MessagePattern, NatsContext, Payload } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,10 +7,11 @@ export class AppController {
   constructor(private readonly minionAppService: AppService) {}
 
   @MessagePattern('pub.*')
-  getData(data: any) {
-    console.log(data);
+  getDate(@Payload() data, @Ctx() context: NatsContext) {
+    console.log(`Subject: ${context.getSubject()}`);
+    console.log('payload', data)
     return data;
-  }  
+  }
 
   @MessagePattern({ cmd: 'sum' })
   sum(data: number[]): number {
