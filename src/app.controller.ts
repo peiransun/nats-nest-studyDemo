@@ -7,21 +7,21 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello() {
+  public getHello() {
     return this.appService.getData();
   }
 
   @Get('sum')
-  sum(@Query('digits') digits) {
+  public sum(@Query('digits') digits) {
     const data = digits.split(',').map(Number);
-    console.log('MasterAppController: sum', data);
+    console.log(`2.Client  ${new Date().toISOString()} --> 接收: sum`, data);
     return this.appService
       .sum(data)
-      .pipe(tap(result => console.log('MasterAppController: sum result', result)));
+      .pipe(tap(result => console.log(`4.Client  ${new Date().toISOString()} --> 接收結果: sum result`, result)));
   }
 
   @Get('reverse')
-  reverse(@Query('message') message) {
+  public reverse(@Query('message') message) {
     return this.appService
       .reverse(message)
       .pipe(tap(result => console.log('MasterAppController: reverse result', result)));

@@ -14,6 +14,7 @@ async function bootstrap() {
   await app.startAllMicroservicesAsync();
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+    console.log(`1.Client  ${new Date().toISOString()} --> NATS Connect`);
   });
 }
 bootstrap();
