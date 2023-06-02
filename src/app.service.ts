@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AppService {
 
-  constructor(
-    @Inject('MATH_SERVICE') private readonly client: ClientProxy,
-  ) {}
+  constructor(@Inject('MATH_SERVICE') private readonly client: ClientProxy) {
+    
+  }
 
   public getData() {
     this.client.emit<string>('pub.event', {name: 'Kevin'});

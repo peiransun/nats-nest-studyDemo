@@ -14,4 +14,5 @@ import { natsConfig } from './nats.config';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}
